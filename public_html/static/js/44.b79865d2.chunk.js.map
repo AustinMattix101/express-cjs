@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/44.b79865d2.chunk.js","mappings":"0IAQA,UANgC,WAC9B,OACE,0CAEJ,C","sources":["components/pages/validateTwoFA/ValidateTwoFA.tsx"],"sourcesContent":["import React from 'react';\r\n\r\nconst ValidateTwoFA: React.FC = () => {\r\n  return (\r\n    <div>ValidateTwoFA</div>\r\n  )\r\n}\r\n\r\nexport default ValidateTwoFA;"],"names":[],"sourceRoot":""}
