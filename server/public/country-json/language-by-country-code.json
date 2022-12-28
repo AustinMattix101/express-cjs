@@ -1,0 +1,58 @@
+[
+        {
+          "code": "en-US",
+          "name": "English",
+          "country_code": "US"
+        },
+        {
+          "code": "en",
+          "name": "English",
+          "country_code": "GB"
+        },
+        {
+          "code": "zh-Hans-CN",
+          "name": "中文 (简体)",
+          "country_code": "CN"
+        },
+        {
+          "code": "zh-Hant-CN",
+          "name": "中文 (繁体)",
+          "country_code": "TW"
+        },
+        {
+          "code": "km-KH",
+          "name": "ភាសាខ្មែរ",
+          "country_code": "KH"
+        },
+        {
+          "code": "ar-SA",
+          "name": "العربية",
+          "country_code": "SA",
+          "dir": "rtl"
+        },
+        {
+          "code": "jp-JP",
+          "name": "Japanese",
+          "country_code": "JP"
+        },
+        {
+          "code": "kr-SK",
+          "name": "South Korea",
+          "country_code": "KR"
+        },
+        {
+          "code": "my-MY",
+          "name": "Malaysia",
+          "country_code": "MY"
+        },
+        {
+          "code": "th-TL",
+          "name": "Thai",
+          "country_code": "TH"
+        },
+        {
+          "code": "vn-VN",
+          "name": "Vietnamese",
+          "country_code": "VN"
+        }
+]

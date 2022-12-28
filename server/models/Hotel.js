@@ -1,7 +1,6 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = require("mongoose");
-const HotelSchema = new mongoose_1.Schema({
+const { Schema, model } = require("mongoose");
+
+const HotelSchema = new Schema({
     name: {
         type: String,
         required: true,
@@ -50,6 +49,6 @@ const HotelSchema = new mongoose_1.Schema({
         required: [true, " Please povide who post this hotel! "],
     },
 }, { timestamps: true });
-const Hotel = (0, mongoose_1.model)("Hotel", HotelSchema);
-exports.default = Hotel;
-//# sourceMappingURL=Hotel.js.map
+
+const Hotel = model("Hotel", HotelSchema);
+module.exports = Hotel;

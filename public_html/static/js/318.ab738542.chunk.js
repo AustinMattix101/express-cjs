@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkget_started=self.webpackChunkget_started||[]).push([[318],{4318:function(t,s,e){e.r(s);var a=e(2791),r=e(1087),d=e(184);s.default=function(){return(0,d.jsxs)(a.Fragment,{children:[(0,d.jsx)("div",{children:"This is stat data"}),(0,d.jsx)(r.rU,{to:"/dashboard",children:"Dashboard"})]})}}}]);
-//# sourceMappingURL=318.ab738542.chunk.js.map

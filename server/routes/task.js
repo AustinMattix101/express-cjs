@@ -1,29 +1,40 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const auth_1 = require("../middlewares/auth");
-const cors_1 = require("../middlewares/cors");
-const express_1 = require("express");
-const taskRouter = (0, express_1.Router)();
-const task_1 = require("../controllers/task");
+const { protect, AdminProtect } = require("../middlewares/auth.js");
+const { corsWithOptions } = require("../middlewares/cors.js");
+const { Router} = require("express");
+const taskRouter = Router();
+
+const { // Tasks
+    postTask,
+    updateTask,
+    deleteTask,
+    findTasks,
+    findTask,
+} = require("../controllers/task.js");
+
+    // Tasks
 taskRouter
     .route('/')
-    .options(cors_1.corsWithOptions)
-    .post(auth_1.protect, task_1.postTask);
+    .options(corsWithOptions)
+    .post(protect, postTask);
+
 taskRouter
     .route('/:id')
-    .options(cors_1.corsWithOptions)
-    .put(auth_1.protect, task_1.updateTask);
+    .options(corsWithOptions)
+    .put(protect, updateTask);
+
 taskRouter
     .route('/:id')
-    .options(cors_1.corsWithOptions)
-    .delete(auth_1.protect, task_1.deleteTask);
+    .options(corsWithOptions)
+    .delete(protect, deleteTask);
+
 taskRouter
     .route('/')
-    .options(cors_1.corsWithOptions)
-    .get(auth_1.protect, task_1.findTasks);
+    .options(corsWithOptions)
+    .get(protect, findTasks);
+
 taskRouter
     .route('/:id')
-    .options(cors_1.corsWithOptions)
-    .get(auth_1.protect, task_1.findTask);
-exports.default = taskRouter;
-//# sourceMappingURL=task.js.map
+    .options(corsWithOptions)
+    .get(protect, findTask);
+
+module.exports = taskRouter;

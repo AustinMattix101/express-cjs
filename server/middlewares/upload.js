@@ -1,20 +1,13 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.UploadMusic = exports.UploadVideos = exports.UploadSquare = exports.UploadPhotos = exports.UploadFiles = void 0;
-const multer_1 = __importDefault(require("multer"));
-const multer_2 = require("../config/multer");
-const multer_3 = require("../utils/multer");
-const UploadFiles = (key, maxCount) => (0, multer_1.default)({ storage: multer_2.filesStorage, fileFilter: multer_3.filesFilter }).array(key, maxCount);
-exports.UploadFiles = UploadFiles;
-const UploadPhotos = (key, maxCount) => (0, multer_1.default)({ storage: multer_2.photosStorage, fileFilter: multer_3.photosFilter }).array(key, maxCount);
-exports.UploadPhotos = UploadPhotos;
-const UploadSquare = (key, maxCount) => (0, multer_1.default)({ storage: multer_2.squareStorage, fileFilter: multer_3.squareFilter }).array(key, maxCount);
-exports.UploadSquare = UploadSquare;
-const UploadVideos = (key, maxCount) => (0, multer_1.default)({ storage: multer_2.videosStorage, fileFilter: multer_3.videosFilter }).array(key, maxCount);
-exports.UploadVideos = UploadVideos;
-const UploadMusic = (key, maxCount) => (0, multer_1.default)({ storage: multer_2.musicStorage, fileFilter: multer_3.musicFilter }).array(key, maxCount);
-exports.UploadMusic = UploadMusic;
-//# sourceMappingURL=upload.js.map
+const multer = require('multer');
+const { filesStorage, musicStorage, photosStorage, squareStorage, videosStorage } = require('../config/multer');
+const { filesFilter, musicFilter, photosFilter, squareFilter, videosFilter } = require('../utils/multer');
+
+module.exports.UploadFiles = (key, maxCount) => multer({ storage: filesStorage, fileFilter: filesFilter }).array(key, maxCount);
+
+module.exports.UploadPhotos = (key, maxCount) => multer({ storage: photosStorage, fileFilter: photosFilter }).array(key, maxCount);
+
+module.exports.UploadSquare = (key, maxCount) => multer({ storage: squareStorage, fileFilter: squareFilter }).array(key, maxCount);
+
+module.exports.UploadVideos = (key, maxCount) => multer({ storage: videosStorage, fileFilter: videosFilter }).array(key, maxCount);
+
+module.exports.UploadMusic = (key, maxCount) => multer({ storage: musicStorage, fileFilter: musicFilter }).array(key, maxCount);

@@ -1,7 +1,6 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = require("mongoose");
-const TaskSchema = new mongoose_1.Schema({
+const { Schema, model } = require("mongoose");
+
+const TaskSchema = new Schema({
     text: String,
     day: String,
     reminder: {
@@ -13,6 +12,6 @@ const TaskSchema = new mongoose_1.Schema({
         required: [true, " Please povide who post this task! "],
     },
 }, { timestamps: true });
-const Task = (0, mongoose_1.model)("Tasks", TaskSchema);
-exports.default = Task;
-//# sourceMappingURL=Task.js.map
+
+const Task = model("Tasks", TaskSchema);
+module.exports = Task;

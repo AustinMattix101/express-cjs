@@ -1,39 +1,94 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = require("express");
-const auth_1 = require("../middlewares/auth");
-const init_js_1 = require("../middlewares/init.js");
-const cors_1 = require("../middlewares/cors");
-const profile_1 = require("../controllers/profile");
-const profile_2 = require("../controllers/profile");
-const profilesRouter = (0, express_1.Router)();
+const { Router } = require('express');
+const profilesRouter = Router();
+const { protect, AdminProtect } = require("../middlewares/auth.js");
+const { 
+    InitOnlyEmailConfirmation,
+    InitpreferedTwoFAOption 
+} = require("../middlewares/init.js");
+const { corsWithOptions } = require("../middlewares/cors.js");
+
+const { findProfile, findProfileByUsername, writeProfile, updateProfile, clearProfile } = require("../controllers/profile.js");
+
+const { updateProfileByUsername, deleteProfileByUsername } = require("../controllers/profile.js"); // Admin Only
+
+
 profilesRouter
-    .route('/')
-    .options(cors_1.corsWithOptions)
-    .get(auth_1.protect, init_js_1.InitOnlyEmailConfirmation, init_js_1.InitpreferedTwoFAOption, profile_1.findProfile);
+    .options(corsWithOptions)
+    .get(
+        '/',
+        protect,
+        InitOnlyEmailConfirmation, 
+        InitpreferedTwoFAOption, 
+        findProfile, 
+        err => next(err)
+    );
+
+profilesRouter  // init email conf... 
+    .options(corsWithOptions)
+    .get(
+        '/:username', 
+        protect,
+        InitOnlyEmailConfirmation,
+        InitpreferedTwoFAOption,  
+        findProfileByUsername,
+        err => next(err)
+    );
+
 profilesRouter
-    .route('/:username')
-    .options(cors_1.corsWithOptions)
-    .get(auth_1.protect, init_js_1.InitOnlyEmailConfirmation, init_js_1.InitpreferedTwoFAOption, profile_1.findProfileByUsername);
+    .options(corsWithOptions)
+    .post(
+        '/', 
+        protect, 
+        InitOnlyEmailConfirmation,
+        InitpreferedTwoFAOption,
+        writeProfile, 
+        err => next(err)
+    );
+
 profilesRouter
-    .route('/')
-    .options(cors_1.corsWithOptions)
-    .post(auth_1.protect, init_js_1.InitOnlyEmailConfirmation, init_js_1.InitpreferedTwoFAOption, profile_1.writeProfile);
+    .options(corsWithOptions)
+    .put(
+        '/', 
+        protect,
+        InitOnlyEmailConfirmation,
+        InitpreferedTwoFAOption, 
+        updateProfile,
+        err => next(err)
+    );
+
 profilesRouter
-    .route('/')
-    .options(cors_1.corsWithOptions)
-    .put(auth_1.protect, init_js_1.InitOnlyEmailConfirmation, init_js_1.InitpreferedTwoFAOption, profile_1.updateProfile);
+    .options(corsWithOptions)
+    .delete(
+        '/',
+        protect,
+        InitOnlyEmailConfirmation,
+        InitpreferedTwoFAOption, 
+        clearProfile,
+        err => next(err)
+    );
+
 profilesRouter
-    .route('/')
-    .options(cors_1.corsWithOptions)
-    .delete(auth_1.protect, init_js_1.InitOnlyEmailConfirmation, init_js_1.InitpreferedTwoFAOption, profile_1.clearProfile);
+    .options(corsWithOptions)
+    .put(
+        '/:username', 
+        protect,
+        InitOnlyEmailConfirmation,
+        InitpreferedTwoFAOption,
+        AdminProtect, 
+        updateProfileByUsername,
+        err => next(err)
+    );
+
 profilesRouter
-    .route('/:username')
-    .options(cors_1.corsWithOptions)
-    .put(auth_1.protect, init_js_1.InitOnlyEmailConfirmation, init_js_1.InitpreferedTwoFAOption, auth_1.AdminProtect, profile_2.updateProfileByUsername);
-profilesRouter
-    .route('/:username')
-    .options(cors_1.corsWithOptions)
-    .delete(auth_1.protect, init_js_1.InitOnlyEmailConfirmation, init_js_1.InitpreferedTwoFAOption, auth_1.AdminProtect, profile_2.deleteProfileByUsername);
-exports.default = profilesRouter;
-//# sourceMappingURL=profile.js.map
+    .options(corsWithOptions)
+    .delete(
+        '/:username',
+        protect,
+        InitOnlyEmailConfirmation,
+        InitpreferedTwoFAOption,
+        AdminProtect, 
+        deleteProfileByUsername,
+        err => next(err)
+    );
+
+module.exports = profilesRouter;

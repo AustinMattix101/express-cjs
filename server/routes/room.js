@@ -1,29 +1,40 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const auth_1 = require("../middlewares/auth");
-const cors_1 = require("../middlewares/cors");
-const express_1 = require("express");
-const roomRouter = (0, express_1.Router)();
-const room_1 = require("../controllers/room");
+const { protect, AdminProtect } = require("../middlewares/auth.js");
+const { corsWithOptions } = require("../middlewares/cors.js");
+const { Router} = require("express");
+const roomRouter = Router();
+
+const { // Room
+    postRoom,
+    updateRoom,
+    deleteRoom,
+    findRooms,
+    findRoom,
+} = require("../controllers/room.js");
+
+    // Room
 roomRouter
     .route('/:hotelid')
-    .options(cors_1.corsWithOptions)
-    .post(auth_1.protect, room_1.postRoom);
+    .options(corsWithOptions)
+    .post(protect, postRoom);
+
 roomRouter
     .route('/:id')
-    .options(cors_1.corsWithOptions)
-    .put(auth_1.protect, room_1.updateRoom);
+    .options(corsWithOptions)
+    .put(protect, updateRoom);
+
 roomRouter
     .route('/:id/:hotelid')
-    .options(cors_1.corsWithOptions)
-    .delete(auth_1.protect, room_1.deleteRoom);
+    .options(corsWithOptions)
+    .delete(protect, deleteRoom);
+
 roomRouter
     .route('/')
-    .options(cors_1.corsWithOptions)
-    .get(auth_1.protect, room_1.findRooms);
+    .options(corsWithOptions)
+    .get(protect, findRooms);
+
 roomRouter
     .route('/:id')
-    .options(cors_1.corsWithOptions)
-    .get(auth_1.protect, room_1.findRoom);
-exports.default = roomRouter;
-//# sourceMappingURL=room.js.map
+    .options(corsWithOptions)
+    .get(protect, findRoom);
+
+module.exports = roomRouter;

@@ -1,14 +1,9 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.getMattixAPI = exports.getAPI = void 0;
-function getAPI(_req, res, _next) {
-    res.status(200).json({ message: `Welcome to Mattix API` });
+module.exports.getAPI = function (req, res) {
+    res.status(200).json({ message: `Welcome to Camunited API` });
 }
-exports.getAPI = getAPI;
-function getMattixAPI(_req, res, _next) {
+
+module.exports.getCamunitedAPI = function (req, res) {
     res.status(200).json({
-        message: `Welcome to Mattix Team API! ;)`
-    });
+        message: `Welcome to Camunited Team API! ;)`
+    })
 }
-exports.getMattixAPI = getMattixAPI;
-//# sourceMappingURL=api.js.map

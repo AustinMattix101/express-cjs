@@ -1,37 +1,53 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const auth_1 = require("../middlewares/auth");
-const cors_1 = require("../middlewares/cors");
-const express_1 = require("express");
-const hotelRouter = (0, express_1.Router)();
-const hotel_1 = require("../controllers/hotel");
+const { protect, AdminProtect } = require("../middlewares/auth.js");
+const { corsWithOptions } = require("../middlewares/cors.js");
+const { Router } = require("express");
+const hotelRouter = Router();
+
+const {  // Hotel
+    postHotel, 
+    updateHotel,
+    deleteHotel,
+    findHotels,
+    findHotel,
+    countByCity,
+    countByType
+} = require("../controllers/hotel.js");
+
+    // Hotel
 hotelRouter
     .route('/')
-    .options(cors_1.corsWithOptions)
-    .post(auth_1.protect, auth_1.AdminProtect, hotel_1.postHotel);
+    .options(corsWithOptions)
+    .post(protect, AdminProtect, postHotel);
+
 hotelRouter
     .route('/:id')
-    .options(cors_1.corsWithOptions)
-    .put(auth_1.protect, auth_1.AdminProtect, hotel_1.updateHotel);
+    .options(corsWithOptions)
+    .put(protect, AdminProtect, updateHotel);
+
 hotelRouter
     .route('/:id')
-    .options(cors_1.corsWithOptions)
-    .delete(auth_1.protect, auth_1.AdminProtect, hotel_1.deleteHotel);
+    .options(corsWithOptions)
+    .delete(protect, AdminProtect, deleteHotel);
+
 hotelRouter
     .route('/')
-    .options(cors_1.corsWithOptions)
-    .get(auth_1.protect, hotel_1.findHotels);
+    .options(corsWithOptions)
+    .get(protect, findHotels);
+
 hotelRouter
     .route('/find/:id')
-    .options(cors_1.corsWithOptions)
-    .get(auth_1.protect, hotel_1.findHotel);
+    .options(corsWithOptions)
+    .get(protect, findHotel);
+
+    // Hotel Query
 hotelRouter
     .route('/countByCity')
-    .options(cors_1.corsWithOptions)
-    .get(auth_1.protect, hotel_1.countByCity);
+    .options(corsWithOptions)
+    .get(protect, countByCity);
+
 hotelRouter
     .route('/countByType')
-    .options(cors_1.corsWithOptions)
-    .get(auth_1.protect, hotel_1.countByType);
-exports.default = hotelRouter;
-//# sourceMappingURL=hotel.js.map
+    .options(corsWithOptions)
+    .get(protect, countByType);
+
+module.exports = hotelRouter;
